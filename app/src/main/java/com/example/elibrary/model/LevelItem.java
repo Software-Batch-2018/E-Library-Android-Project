@@ -1,14 +1,14 @@
-package com.example.elibrary;
+package com.example.elibrary.model;
 
 import java.util.ArrayList;
 
-public class Item{
+public class LevelItem{
     public String level_id;
     public String level;
     public String level_img;
     public ArrayList<Object> subjects;
 
-    public Item(String level_id, String level, String level_img, ArrayList<Object> subjects) {
+    public LevelItem(String level_id, String level, String level_img, ArrayList<Object> subjects) {
         this.level_id = level_id;
         this.level = level;
         this.level_img = level_img;
@@ -45,5 +45,13 @@ public class Item{
 
     public void setSubjects(ArrayList<Object> subjects) {
         this.subjects = subjects;
+    }
+
+    public static class Meta{
+        public int totalItems;
+        public int itemCount;
+        public int itemsPerPage;
+        public int totalPages;
+        public int currentPage;
     }
 }

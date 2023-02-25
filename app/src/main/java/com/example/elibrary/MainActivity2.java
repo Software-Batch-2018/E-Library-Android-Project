@@ -2,41 +2,71 @@ package com.example.elibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.util.Log;
+import android.widget.ListView;
+
+import com.example.elibrary.model.ListData;
+import com.example.elibrary.model.SubjectItem;
+import com.example.elibrary.model.Subjects;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    private Button previous_button;
-    private TextView message;
+    String api = "http://192.168.1.73:3001/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        previous_button = findViewById(R.id.prev_button);
-        message = findViewById(R.id.message);
-
+        List<ListData> listItems = new ArrayList<>();
 
         Bundle b = getIntent().getExtras();
+        String level_id = "";
 
-        String text = "";
-        if(b!= null){
-            text = b.getString("message");
-            message.append(text);
+        if(b != null){
+            level_id = b.getString("level_id");
         }
 
+        MyListAdapter adapter = new MyListAdapter(this, listItems, ChapterActivity.class);
+        ListView listView = findViewById(R.id.list);
 
-        previous_button.setOnClickListener(new View.OnClickListener() {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(api).addConverterFactory(GsonConverterFactory.create()).build();
+
+        ApiInterface apiInterface = retrofit.create(ApiInterface.class);
+
+        Call<Subjects> call = apiInterface.getSubjects(level_id);
+
+        call.enqueue(new Callback<Subjects>() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                startActivity(intent);
+            public void onResponse(Call<Subjects> call, Response<Subjects> response) {
+                if(response.isSuccessful()){
+                    Log.d("nigga", "onResponse: ");
+                    ArrayList<SubjectItem> item = response.body().getItems();
+                    for (int i = 0; i< item.size(); i++){
+                        listItems.add(new ListData(item.get(i).getSubject_name(), item.get(i).getSubject_img(), item.get(i).getSubject_id()));
+                        listView.setAdapter(adapter);
+                        return;
+                    }
+                }else{
+                    Log.d("nigga", "onResponse: "+ response);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Subjects> call, Throwable t) {
+
             }
         });
+
     }
 }

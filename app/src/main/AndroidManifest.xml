@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ContentViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChapterActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity2"
             android:exported="false">
             <meta-data

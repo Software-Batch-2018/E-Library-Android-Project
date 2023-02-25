@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">elibrary</string>
+    <string name="hello_from_chapters">Hello From CHapters</string>
 </resources>

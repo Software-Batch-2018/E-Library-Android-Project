@@ -2,14 +2,13 @@ package com.example.elibrary;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.elibrary.model.LevelItem;
+import com.example.elibrary.model.Levels;
+import com.example.elibrary.model.ListData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +21,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    String api = "http://192.168.1.79:3001/api/";
+    String api = "http://192.168.1.73:3001/api/";
     private TextView textViewResult;
-    private Button move;
     TextView l;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,28 +31,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         List<ListData> listItems = new ArrayList<>();
 
-        MyListAdapter adapter = new MyListAdapter(this, listItems);
+        MyListAdapter adapter = new MyListAdapter(this, listItems, MainActivity2.class);
         ListView listView = findViewById(R.id.list);
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(api).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
-        Call<Levels> call = apiInterface.getPosts();
+        Call<Levels> call = apiInterface.getLevels();
 
         call.enqueue(new Callback<Levels>() {
             @Override
             public void onResponse(Call<Levels> call, Response<Levels> response) {
-                Log.d("nigga", "Sad Response: ");
                 if(response.isSuccessful()){
-                    ArrayList <Item> item = response.body().getItems();
-                    String[] names = new String[item.size()];
+                    ArrayList <LevelItem> item = response.body().getItems();
                     for (int i = 0; i < item.size(); i++) {
-                        listItems.add(new ListData(item.get(i).getLevel(), item.get(i).getLevel_img()));
+                        listItems.add(new ListData(item.get(i).getLevel(), item.get(i).getLevel_img(), item.get(i).getLevel_id()));
                         listView.setAdapter(adapter);
                     }
                     return;
@@ -66,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Levels> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+
             }
 
 

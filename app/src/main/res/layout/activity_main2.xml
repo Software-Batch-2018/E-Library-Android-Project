@@ -1,33 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:orientation="vertical" >
+    >
 
-    <TextView
+    <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="top"
-        android:textSize="30dp"
-        android:text="Hello From Second Activity"
-         />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_weight="1"
-        android:height="0dp"
-        android:id="@+id/message"
-        android:textSize="30dp" />
-
-    <Button
-        android:layout_width="200dp"
-        android:id="@+id/prev_button"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="Previous Activity" />
-</LinearLayout>
+        />
+</RelativeLayout>
