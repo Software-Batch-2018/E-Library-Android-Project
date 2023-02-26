@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 
+import com.example.elibrary.env.EnvVariable;
 import com.example.elibrary.model.ListData;
 import com.example.elibrary.model.SubjectItem;
 import com.example.elibrary.model.Subjects;
@@ -21,7 +22,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    String api = "http://192.168.1.73:3001/api/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class MainActivity2 extends AppCompatActivity {
         MyListAdapter adapter = new MyListAdapter(this, listItems, ChapterActivity.class);
         ListView listView = findViewById(R.id.list);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(api).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(EnvVariable.API).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 

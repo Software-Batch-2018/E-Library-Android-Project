@@ -9,9 +9,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="72dp"
+        android:layout_width="52dp"
         android:scaleType="fitXY"
-        android:layout_height="72dp"
+        android:layout_height="52dp"
         />
 
     <TextView
@@ -19,7 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:textFontWeight="700"
+        android:textColor="@color/black"
         android:text="Item"/>
 
 

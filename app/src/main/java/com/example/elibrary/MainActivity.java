@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.elibrary.env.EnvVariable;
 import com.example.elibrary.model.LevelItem;
 import com.example.elibrary.model.Levels;
 import com.example.elibrary.model.ListData;
@@ -21,10 +22,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    String api = "http://192.168.1.73:3001/api/";
-    private TextView textViewResult;
-    TextView l;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -36,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         MyListAdapter adapter = new MyListAdapter(this, listItems, MainActivity2.class);
         ListView listView = findViewById(R.id.list);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(api).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(EnvVariable.API).addConverterFactory(GsonConverterFactory.create()).build();
 
         ApiInterface apiInterface = retrofit.create(ApiInterface.class);
 
@@ -54,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
             }
-
 
             @Override
             public void onFailure(Call<Levels> call, Throwable t) {

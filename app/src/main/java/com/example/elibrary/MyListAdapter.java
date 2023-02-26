@@ -55,6 +55,9 @@ public class MyListAdapter extends ArrayAdapter<ListData> {
                 if(intent_class == ChapterActivity.class){
                     bundle.putString("content_id", listItem.getLevelId());
                 }
+                if(intent_class == ContentViewActivity.class){
+                    bundle.putString("content", listItem.getLevelId());
+                }
                 intent.putExtras(bundle);
                 getContext().startActivity(intent);
             }
