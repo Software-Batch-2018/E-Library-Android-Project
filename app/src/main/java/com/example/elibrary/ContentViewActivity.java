@@ -9,22 +9,6 @@ import android.webkit.WebView;
 public class ContentViewActivity extends AppCompatActivity {
     WebView webView;
 
-//    public  String html = "<h1>Heading 1</h1>\n" +
-//            " <h2>Heading 2</h2>\n" +
-//            "<p>This is some html. Look, here's an <u>underline</u>.</p>\n" +
-//            "<p>Look, this is <em>emphasized.</em> And here\\\\'s some <b>bold</b>.</p>\n" +
-//            "<p>Here are UL list items:\n" +
-//            "<ul>\n" +
-//            "    <li>One</li>\n" +
-//            "    <li>Two</li>\n" +
-//            "    <li>Three</li>\n" +
-//            "</ul>\n" +
-//            "<p>Here are OL list items:\n" +
-//            "<ol>\n" +
-//            "    <li>One</li>\n" +
-//            "    <li>Two</li>\n" +
-//            "    <li>Three</li>\n" +
-//            "</ol>";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

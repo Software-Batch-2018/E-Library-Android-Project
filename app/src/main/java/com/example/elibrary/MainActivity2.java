@@ -50,15 +50,11 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onResponse(Call<Subjects> call, Response<Subjects> response) {
                 if(response.isSuccessful()){
-                    Log.d("nigga", "onResponse: ");
                     ArrayList<SubjectItem> item = response.body().getItems();
                     for (int i = 0; i< item.size(); i++){
                         listItems.add(new ListData(item.get(i).getSubject_name(), item.get(i).getSubject_img(), item.get(i).getSubject_id()));
                         listView.setAdapter(adapter);
-                        return;
                     }
-                }else{
-                    Log.d("nigga", "onResponse: "+ response);
                 }
             }
 
